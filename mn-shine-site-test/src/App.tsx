@@ -3,6 +3,7 @@ import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import FloatingContact from "./components/FloatingContact";
+import Navbar from "./components/Navbar";
 
 
 
@@ -10,6 +11,7 @@ import FloatingContact from "./components/FloatingContact";
 function App() {
   return (
     <div>
+      <Navbar/>
       <Hero />
       <Services/>
       <Testimonials/>

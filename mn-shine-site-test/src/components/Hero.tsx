@@ -1,24 +1,45 @@
+  import { useEffect, useState } from "react";
+
+  import img1 from "../assets/hero/foto-limpeza-1.jpeg";
+  import img3 from "../assets/hero/foto-limpeza-3.jpeg";
+  import img4 from "../assets/hero/foto-limpeza-4.jpeg";
+  import img5 from "../assets/hero/foto-limpeza-5.jpeg";
+
 
 export default function Hero() {
+  const images = [ img1, img3, img4, img5 ];
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % images.length);
+    }, 5000); // troca a cada 5s
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
 
-      {/* Background image */}
+      {/* IMAGENS (FADE CORRETO) */}
       <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=2000&q=80"
-          alt="Cleaning service"
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            // fallback caso imagem falhe
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
+        {images.map((img, i) => (
+          <img
+            key={i}
+            src={img}
+            alt="Cleaning service"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              i === index ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
       </div>
 
       {/* Fallback gradient (aparece se imagem falhar ou por cima dela) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-blue-500 to-cyan-400 opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#F6F1E8] via-[#E9E3DA] to-[#6F8F7A] opacity-60" />
 
+      
       {/* Overlay para contraste */}
       <div className="absolute inset-0 bg-black/40" />
 
@@ -26,7 +47,7 @@ export default function Hero() {
       <div className="relative max-w-3xl text-white">
 
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          Professional Cleaning Services
+          Cleaning Services
         </h1>
 
         <p className="mt-6 text-lg md:text-xl text-white/80">
@@ -37,25 +58,25 @@ export default function Hero() {
         <div className="mt-10 flex flex-col md:flex-row gap-4 justify-center">
 
           <a
-            href="sms:+123456789?body=Hi, I would like to get a cleaning quote and schedule a visit."
-            className="bg-white text-blue-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition shadow-lg"
+            href="#contact"
+            className="bg-green-700 text-[#f4f5f2] px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 hover:text-green-700 active:scale-95 transition-all duration-300 shadow-lg"
           >
-            Get Quote by Text (SMS)
+            Get Quote
           </a>
 
-          <a
+          {/* <a
             href="https://wa.me/123456789?text=Hi, I would like to get a cleaning quote and schedule a visit."
             target="_blank"
                 className="bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition shadow-lg"
 
           >
             WhatsApp
-         </a>
+         </a> */}
           
 
           <a
             href="#services"
-            className="border border-white/40 text-white px-6 py-3 rounded-xl font-semibold hover:bg-white/10 transition"
+            className="bg-green-700 text-[#f4f5f2] px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 hover:text-green-700 active:scale-95 transition-all duration-300 shadow-lg"
           >
             View Services
           </a>
